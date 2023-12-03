@@ -9,14 +9,14 @@ let s_path_file_current = new URL(import.meta.url).pathname;
 let s_path_folder_current = s_path_file_current.split('/').slice(0, -1).join('/'); 
 // console.log(s_path_folder_current)
 // Deno.exit()
+const b_deno_deploy = Deno.env.get("DENO_DEPLOYMENT_ID") !== undefined;
+
 await f_websersocket_serve(
     [
         {
-            b_https: true,
-            n_port: 4343,
+            b_https: (b_deno_deploy) ? true : false,
+            n_port: (b_deno_deploy) ? 80 : (4343),
             s_hostname: 'localhost',
-            s_path_certificate_file: './custom.crt',
-            s_path_key_file: './custom.key',
             f_v_before_return_response: async function(o_request){
 
                 let o_url = new URL(o_request.url);
