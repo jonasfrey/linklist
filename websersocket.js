@@ -14,7 +14,7 @@ const b_deno_deploy = Deno.env.get("DENO_DEPLOYMENT_ID") !== undefined;
 await f_websersocket_serve(
     [
         {
-            b_https: (b_deno_deploy) ? true : false,
+            b_https: (b_deno_deploy) ? false : true,
             n_port: (b_deno_deploy) ? 80 : (4343),
             s_hostname: 'localhost',
             f_v_before_return_response: async function(o_request){
